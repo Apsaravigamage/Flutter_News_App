@@ -1,10 +1,11 @@
+
 import 'dart:convert';
 
 import 'package:flutter_news/models/article_model.dart';
 import 'package:http/http.dart' as http;
 
 class News{
-  List<ArticleModel> news = [];
+  List<ArticleModel> news = []; 
   
   Future<void> getNews() async{
     String url ="http://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=b14c3f1584d64982b8b0c7b276d295a8";

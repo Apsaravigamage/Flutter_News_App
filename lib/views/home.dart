@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news/helper/data.dart';
 import 'package:flutter_news/helper/news.dart';
@@ -57,11 +58,11 @@ class _HomeState extends State<Home> {
       ):
       SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.symmetric(horizontal:16, vertical: 16,),
           child: Column(
             children:<Widget>[
               //categories
               Container(
-                padding: EdgeInsets.symmetric(horizontal:16, vertical: 16,),
                 height: 120,
                 child: ListView.builder(
                   itemCount: categories.length,
@@ -77,9 +78,11 @@ class _HomeState extends State<Home> {
               ),
               //Blogs
               Container(
+                padding: EdgeInsets.only(top:16),
                 child: ListView.builder(
                   itemCount: articles.length,
                   shrinkWrap: true,
+                  physics: ClampingScrollPhysics(),
                   itemBuilder: (context,index){
                      return BlogTile(
                        imageUrl: articles[index].urlToImage,
@@ -109,7 +112,8 @@ class CategoryTile extends StatelessWidget {
         children: <Widget>[
          ClipRRect(
           borderRadius: BorderRadius.circular(6),
-          child: Image.network(imageUrl, width: 120,height: 100, fit: BoxFit.cover,)),
+          child: CachedNetworkImage(
+            imageUrl: imageUrl, width: 120,height: 100, fit: BoxFit.cover,)),
           Container(
             alignment: Alignment.center,
             width: 120,height: 100,
@@ -117,8 +121,7 @@ class CategoryTile extends StatelessWidget {
               borderRadius: BorderRadius.circular(6),
               color: Colors.black26,
             ),
-            child: Text(
-              categoryName, 
+            child: Text(categoryName, 
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 14,
@@ -141,11 +144,23 @@ class BlogTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom:16),
       child: Column(
         children: <Widget>[
-          Image.network(imageUrl),
-          Text(title),
-          Text(desc),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(imageUrl),
+          ),
+          SizedBox(height:8),
+          Text(title,style: TextStyle(
+            fontSize:17,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),),
+          SizedBox(height:8),
+          Text(desc, style: TextStyle(
+            color:Colors.black26
+          ),),
         ]
       ),
     );

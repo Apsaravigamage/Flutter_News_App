@@ -6,7 +6,7 @@ List<CategoryModel> getCategories(){
   CategoryModel categoryModel = new CategoryModel();
 
   //1
-  categoryModel.categoryName = "Bussines";
+  categoryModel.categoryName = "Business";
   categoryModel.imageUrl = "https://images.unsplash.com/photo-1516910817563-4df1c1b69058?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80";
   category.add(categoryModel); 
   categoryModel = new CategoryModel();

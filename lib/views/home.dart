@@ -5,6 +5,7 @@ import 'package:flutter_news/helper/news.dart';
 import 'package:flutter_news/models/article_model.dart';
 import 'package:flutter_news/models/category_model.dart';
 import 'package:flutter_news/views/article_view.dart';
+import 'package:flutter_news/views/category_news.dart';
 
 
 class Home extends StatefulWidget {
@@ -103,36 +104,45 @@ class _HomeState extends State<Home> {
 
 class CategoryTile extends StatelessWidget {
 
-  final imageUrl, categoryName;
+  final String imageUrl, categoryName;
   CategoryTile({this.imageUrl, this.categoryName});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right:10),
-      child: Stack(
-        children: <Widget>[
-         ClipRRect(
-          borderRadius: BorderRadius.circular(6),
-          child: CachedNetworkImage(
-            imageUrl: imageUrl, width: 120,height: 100, fit: BoxFit.cover,)),
-          Container(
-            alignment: Alignment.center,
-            width: 120,height: 100,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: Colors.black26,
-            ),
-            child: Text(categoryName, 
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
+    return GestureDetector(
+      onTap: (){
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => CategoryNews(
+            category:categoryName.toLowerCase(),
           )
-        ],
-      )
+         ));
+      },
+      child: Container(
+        margin: EdgeInsets.only(right:10),
+        child: Stack(
+          children: <Widget>[
+           ClipRRect(
+            borderRadius: BorderRadius.circular(6),
+            child: CachedNetworkImage(
+              imageUrl: imageUrl, width: 120,height: 100, fit: BoxFit.cover,)),
+            Container(
+              alignment: Alignment.center,
+              width: 120,height: 100,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: Colors.black26,
+              ),
+              child: Text(categoryName, 
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
+          ],
+        )
+      ),
     );
   }
 }
